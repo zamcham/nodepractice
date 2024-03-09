@@ -1,3 +1,5 @@
-export function sayHEllo(name) {
+function sayHEllo(name) {
     console.log('Hello ' + name);
 }
+
+module.exports.logger = sayHEllo;
