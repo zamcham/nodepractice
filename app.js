@@ -1,3 +1,3 @@
-const log = require('./logger');
+const os = require('node:os');
 
-log('this is the message');
+console.log(`The platform is: ${os.platform()}`);
