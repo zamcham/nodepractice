@@ -1,3 +1,9 @@
-const os = require('node:os');
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
 
-console.log(`The platform is: ${os.platform()}`);
+emitter.on('messageLogged', (arg) => {
+    console.log('Listener called', arg);
+});
+
+const log = require('./logger');
+log('message');
