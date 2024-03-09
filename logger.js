@@ -1,5 +1,5 @@
-function sayHEllo(name) {
-    console.log('Hello ' + name);
+function log(message) {
+    console.log(message);
 }
 
-module.exports.logger = sayHEllo;
+module.exports.log = log;
