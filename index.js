@@ -1,14 +1,40 @@
-console.log('Before');
-getUser(1)
-    .then(res => console.log(res));
-console.log('After');
+const { get } = require('config');
+const mongoose = require('mongoose');
 
-function getUser(id) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            console.log('Reading a user from a database...');
-            //We pass an obj as a parameter to the callback function
-            resolve({ id: id, gitHubUsername: 'Cris' });
-        }, 2000);
+mongoose.connect('mongodb://localhost/playground')
+    .then(() => console.log('Connected to MongoDB...'))
+    .catch(err => console.error('Could not connect to MongoDB...', err));
+
+const courseSchema = new mongoose.Schema({
+    name: String,
+    author: String,
+    tags: [String],
+    date: { type: Date, default: Date.now },
+    isPublished: Boolean
+});
+
+// Classes, objects
+const Course = mongoose.model('Course', courseSchema);
+
+async function createCourse() {
+    const course = new Course({
+        name: 'Angular Course',
+        author: 'Cristian',
+        tags: ['angular', 'frontend'],
+        isPublished: true
     });
+
+    const result = await course.save();
+    console.log(result);
 }
+
+async function getCourses() {
+    const courses = await Course
+        .find({ author: 'Cristian', isPublished: true })
+        .limit(10)
+        .sort({ name: 1 })
+        .select({ name: 1, tags: 1 });
+    console.log(courses);
+}
+
+getCourses();
