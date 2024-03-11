@@ -61,7 +61,7 @@ function validateRental(rental) {
     movieId: Joi.objectId().required()
   });
 
-  return Joi.validate(rental);
+  return schema.validate(rental);
 }
 
 exports.Rental = Rental;

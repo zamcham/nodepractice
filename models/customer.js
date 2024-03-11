@@ -27,7 +27,7 @@ function validateCustomer(customer) {
     isGold: Joi.boolean()
   });
 
-  return Joi.validate(customer);
+  return schema.validate(customer);
 }
 
 exports.Customer = Customer;
