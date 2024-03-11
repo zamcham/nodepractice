@@ -20,6 +20,7 @@ router.post('/', async (req, res) => {
   res.send(token);
 });
 
+//We use auth's own validate function rather than importing it
 function validate(req) {
   const schema = Joi.object({
     email: Joi.string().min(5).max(255).required().email(),
