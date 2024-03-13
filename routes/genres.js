@@ -4,12 +4,11 @@ const { Genre, validate } = require('../models/genre');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-const asyncMiddleware = require('../middleware/async');
 
-router.get('/', asyncMiddleware(async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   const genres = await Genre.find().sort('name');
   res.send(genres);
-}));
+});
 
 router.post('/', auth, async (req, res) => {
   const { error } = validate(req.body);
