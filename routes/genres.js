@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
   } catch (error) {
     res.status(500).send('Something went wrong');
   }
-
 });
 
 router.post('/', auth, async (req, res) => {
